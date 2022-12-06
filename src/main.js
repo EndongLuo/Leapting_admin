@@ -11,13 +11,18 @@ import store from '@/store';
 //引入先关的mock数据的文件【需要代码执行一次】
 import '@/mock/serve';
 
+// 清除默认样式的css
+import '@/assets/css/common.css';
+// flexible、fastclick工具包
+import '@/utils/flexible';
+import '@/utils/fastclick';
 
 //引入全部的请求函数
 import * as API from '@/api';
-//按需引入相应使用的组件【按需引入注册组件的第一种方式】
-import { Button } from 'element-ui';
-//注册为全局组件---注册组件方式之一
-Vue.component(Button.name, Button);
+// 引入ElementUI
+import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
+Vue.use(ElementUI);
 
 
 new Vue({
