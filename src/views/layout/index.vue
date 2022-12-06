@@ -1,6 +1,7 @@
 <template>
   <el-container>
-    <el-aside width="200px">Aside</el-aside>
+    <el-aside width="200px">
+    </el-aside>
     <el-container>
       <el-header>Header</el-header>
       <el-main>
@@ -58,4 +59,5 @@ export default {
   
   .el-container:nth-child(7) .el-aside {
     line-height: 20rem;
-  }</style>
+  }
+  </style>
