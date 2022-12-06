@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <layout />
+    <!-- <layout /> -->
+    
+    <router-view />
   </div>
 </template>
 
@@ -11,6 +13,9 @@ export default {
   name: 'App',
   components: {
     layout
+  },
+  mounted(){
+    console.log(this.$route)
   }
 }
 </script>

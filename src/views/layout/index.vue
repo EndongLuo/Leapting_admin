@@ -2,40 +2,37 @@
   <el-container>
     <!-- 左边菜单 -->
     <el-aside width="collapse">
-        
       <el-menu class="el-menu-vertical" :collapse="isCollapse">
         <div class="logo">
-            <img src="@/assets/logo.png" alt="logo">
+          <img src="@/assets/logo.png" alt="logo" />
         </div>
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span slot="title">导航一</span>
-          </template>
-          <el-menu-item-group>
-            <span slot="title">分组一</span>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <span slot="title">选项4</span>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item index="3" >
-          <i class="el-icon-document"></i>
-          <span slot="title">导航三</span>
+        <router-link to="/">
+          <el-menu-item index="1">
+            <i class="el-icon-house"></i>
+            <span slot="title">首页</span>
+          </el-menu-item>
+        </router-link>
+        <router-link to="/test">
+          <el-menu-item index="2">
+            <i class="el-icon-user"></i>
+            <span slot="title">用户</span>
+          </el-menu-item>
+        </router-link>
+        <el-menu-item index="3">
+          <i class="el-icon-cpu"></i>
+          <span slot="title">机器人</span>
         </el-menu-item>
         <el-menu-item index="4">
+          <i class="el-icon-map-location"></i>
+          <span slot="title">地图</span>
+        </el-menu-item>
+        <el-menu-item index="5">
+          <i class="el-icon-document"></i>
+          <span slot="title">日志</span>
+        </el-menu-item>
+        <el-menu-item index="6">
           <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
+          <span slot="title">设置</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
@@ -51,10 +48,10 @@
       </el-header>
       <!-- 主要内容-路由组件 -->
       <el-main>
-        <test />
+        <router-view />
       </el-main>
       <!-- 页脚 -->
-      <el-footer>Footer</el-footer>
+      <!-- <el-footer>Copyright © 2020-2022 leapting All Rights Reserved.</el-footer> -->
     </el-container>
   </el-container>
 </template>
@@ -72,12 +69,6 @@ export default {
     };
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
     isC() {
       this.isCollapse = !this.isCollapse;
       this.toggle = !this.toggle;
@@ -88,54 +79,48 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.logo{
-    // width: 199px;
-    // height: 60px;
-    // img{
-    //     width: 100%;
-    //     height: 100%;
-    // }
+.logo {
+  height: 60px;
+  img {
+    height: 100%;
+  }
 }
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 200px;
-//   min-height: 400px;
   height: 100vh;
 }
-.el-header,
+.el-header {
+  border-bottom: #c2c2c2 solid 1px;
+}
 .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
-  height: 5vh;
+  text-align: center;
+  line-height: 60px;
 }
 .collapse-btn {
-  margin-top: 0.2rem;
-  font-size: 0.5rem;
+  margin-top: 8px;
+  font-size: 36px;
 }
 
 .el-aside {
   background-color: #d3dce6;
   height: 100vh;
   color: #333;
-  text-align: center;
   background-color: #fff;
 }
 
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-}
+// .el-main {
+// }
 
-body > .el-container {
-  margin-bottom: 2.5rem;
-}
+// body > .el-container {
+// //   margin-bottom: 2.5rem;
+// }
 
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 16.25rem;
-}
+// .el-container:nth-child(5) .el-aside,
+// .el-container:nth-child(6) .el-aside {
+// //   line-height: 16.25rem;
+// }
 
-.el-container:nth-child(7) .el-aside {
-  line-height: 20rem;
-}
+// .el-container:nth-child(7) .el-aside {
+// //   line-height: 20rem;
+// }
 </style>

@@ -46,7 +46,7 @@ let router = new VueRouter({
 
 // 全局前置路由守卫
 router.beforeEach(async (to, from, next) => {
-
+    next()
   
 });
 

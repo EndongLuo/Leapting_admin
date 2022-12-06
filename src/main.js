@@ -8,7 +8,7 @@ import router from '@/router';
 // 引入仓库
 import store from '@/store';
 
-//引入先关的mock数据的文件【需要代码执行一次】
+//引入mock数据的文件
 import '@/mock/serve';
 
 // 清除默认样式的css
