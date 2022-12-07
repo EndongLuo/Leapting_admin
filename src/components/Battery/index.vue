@@ -3,13 +3,13 @@
     <div class="panel" :style="{ transform: `rotate(${rotate}deg)` }">
       <div class="remainder" :style="{ width: quantity + '%' }" />
     </div>
-    <div
+    <!-- <div
       v-show="showText"
       :style="{ marginLeft: (parseFloat(rotate) ? 0 : '10') + 'px' }"
       class="text"
     >
       {{ quantity }}%
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -18,6 +18,7 @@
  * 电池电量Icon
  */
 export default {
+  name:'Battery',
   props: {
     // 电量值
     quantity: {
@@ -65,14 +66,15 @@ export default {
 }
 .electric-panel {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
+  margin-right: 10px;
 
   .panel {
     box-sizing: border-box;
     width: 30px;
-    height: 14px;
-    position: relative;
+    height: 16px;
+    // position: relative;
     border: 2px solid #ccc;
     padding: 1px;
     border-radius: 3px;
@@ -88,7 +90,6 @@ export default {
       right: -4px;
       transform: translateY(-50%);
     }
-
     .remainder {
       border-radius: 1px;
       position: relative;
