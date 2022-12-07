@@ -4,12 +4,13 @@
     <!-- 表单验证 -->
     <form action="">
     <div class="div-from"> 
-    <h1>欢迎登录</h1>
-      <input type="text" class="ipt-zh" placeholder="账户:">
+    <div class="welcome">欢迎登录</div>
+      <input type="text" class="ipt-zh" placeholder="账户:" >
       <br>
       <input type="password" class="ipt-mm" placeholder="密码:">
       <br>
-      <button class="btn-dl" @click ="handle">登录</button>
+      <!-- <button class="btn-dl" @click ="handle">登录</button> -->
+      <el-button class="btn-dl" @click ="handle">点击登录</el-button>
     </div>
   </form>
   </div>
@@ -17,15 +18,21 @@
 
 <script>
     export default{
-      date:{
-
-      },
+        data() {
+          return{
+            account:"",
+            password:"",
+          };
+        },
         methods:{
             handle (){
            //点击跳转
-                this.$router.push('/layout');
-            }
-        }
+          //  if(!this.account=="" && !this.mima==""){
+          //   localStorage.setItem("nama",this.account);
+          //  }
+           this.$router.push('/layout');
+            },
+        },
     }
 </script>
 
@@ -75,15 +82,15 @@ input:focus{
 }
 .btn-dl{
   background-color:#1c3b7a ;
-  width: 1.3rem;
-  height: 0.5rem;
   margin-top: 0.5rem;
   border-radius: 1rem;
   color: white;
 }
-h1{
+.welcome{
   font-size: 0.3rem;
   margin-top: 0.3rem;
   color: rgb(0, 6, 10);
 }
+
+
 </style>

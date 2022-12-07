@@ -47,7 +47,9 @@ let router = new VueRouter({
 // 全局前置路由守卫
 router.beforeEach(async (to, from, next) => {
 
+
   next()
+
 });
 
 //全局后置路由守卫————初始化的时候被调用、每次路由切换之后被调用
