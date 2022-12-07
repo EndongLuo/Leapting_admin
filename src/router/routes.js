@@ -2,9 +2,19 @@ export default [
   // 重定向
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/login',
     meta: { isShow: true },
   },
+  {
+    path:'/login',
+    name:'Login',
+    component:() => import('@/views/Login.vue')
+  },
+  {
+    path:'/layout',
+    name:'layout',
+    component:() => import('@/views/layout')
+  }
   // {
   //   path: '/home',
   //   component: () => import('@/pages/Home'),

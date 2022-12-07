@@ -108,8 +108,8 @@
     height: 5vh;
   }
   .collapse-btn {
-    margin-top: 0.2rem;
-    font-size: 0.5rem;
+    margin-top: 8px;
+    font-size:36px;
   }
   .el-aside {
     background-color: #d3dce6;
