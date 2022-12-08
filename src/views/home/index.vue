@@ -2,7 +2,7 @@
     <div class="test">
         <tips />
         首页
-
+<operation />
     </div>
     
   </template>
