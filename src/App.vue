@@ -15,7 +15,6 @@ export default {
     layout
   },
   mounted(){
-    console.log(this.$route)
   }
 }
 </script>

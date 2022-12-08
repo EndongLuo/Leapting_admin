@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test4</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #can{
+            border: 2px solid black;
+        }
+        input{
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="can"></canvas>
+
+
+<div id="contorl">
+    <input type="button" value="left" onclick="left()">
+    <input type="button" value="+" onclick="zoomIn()">
+    <input type="button" value="-" onclick="zoomDown()">
+    <a href="https://sampleserver6.arcgisonline.com/arcgis/rest/services/AGP/Census/MapServer/export?bbox=${xmin}%2C${ymin}%2C${xmax}%2C${ymax}&bboxSR=4269&imageSR=4269&size=800%2C600&dpi=120&format=png32&transparent=true&layers=show%3A0%2C1%2C2%2C3&f=image">地址</a>
+</div>
+
+
+<script>
+    function url() {
+        // return 'https://geo.datav.aliyun.com/areas_v3/bound/410000_full.json'
+        // https://sampleserver6.arcgisonline.com/arcgis/rest/services/AGP/Census/MapServer/export?bbox=${xmin}%2C${ymin}%2C${xmax}%2C${ymax}&bboxSR=4269&imageSR=4269&size=800%2C600&dpi=120&format=png32&transparent=true&layers=show%3A0%2C1%2C2%2C3&f=image
+        return `https://sampleserver6.arcgisonline.com/arcgis/rest/services/AGP/Census/MapServer/export?bbox=${xmin}%2C${ymin}%2C${xmax}%2C${ymax}&bboxSR=4269&imageSR=4269&size=800%2C600&dpi=120&format=png32&transparent=true&layers=show%3A0%2C1%2C2%2C3&f=image`;
+    }
+
+    function draw() {
+        img.src = url();
+        // img.src = './map.geojson';
+        if (img.complete) {
+            ctx.clearRect(0, 0, 800, 600);
+            ctx.drawImage(img, 0, 0);
+            return
+        }
+        img.onload = function () {
+            ctx.clearRect(0, 0, 800, 600);
+            ctx.drawImage(img, 0, 0);
+        };
+    }
+
+    function left() {
+        var dx = xmax - xmin;
+        xmin -= dx * 0.2;
+        xmax -= dx * 0.2;
+        draw()
+    }
+
+    //放大
+    function zoomIn(){
+        var dx = xmax - xmin;
+        var dy = ymax - ymin;
+        xmin += dx / 4;
+        xmax -= dx / 4;
+        ymin += dy / 4;
+        ymax -= dy / 4;
+        draw();
+    }
+
+    //缩小
+    function zoomDown(){
+        var dx = xmin- xmax  ;
+        var dy =  ymin- ymax;
+        xmin += dx * 4;
+        xmax -= dx * 4;
+        ymin += dy * 4;
+        ymax -= dy * 4;
+        draw();
+    }
+
+    //xmin":-111.54017591943592,"ymin":40.49209635279981,"xmax":-111.41984257464203,"ymax":40.58234636139523
+    // var xmin = -111.5342863648844, ymin = 40.49209635279982, xmax =-111.42573212919356, ymax = 40.58234636139524;
+    var xmin = -111.54017591943592, ymin = 40.49209635279981, xmax =-111.41984257464203, ymax = 40.58234636139523;
+    var can = document.getElementById("can");
+    can.width = 800;
+    can.height = 600;
+    var ctx = can.getContext("2d");
+
+    var img = new Image();
+
+    draw();
+
+    can.onmousedown = function (event) {
+        event = event || window.event;
+        var left = event.offsetX;
+        var top = event.offsetY;
+        console.log(left, top);
+
+        can.onmousemove = function(event){
+            event = event || window.event;
+            var left2 = event.offsetX;
+            var top2 = event.offsetY;
+            var moveleft = left2 - left;
+            var movetop = top2 - top;
+            ctx.clearRect(0, 0, 800, 600);
+            ctx.drawImage(img, moveleft, movetop);
+        }
+
+        can.onmouseup = function (event) {
+            event = event || window.event;
+            var left1 = event.offsetX;
+            var top1 = event.offsetY;
+            var moveleft = left1 - left;
+            var movetop = top1 - top;
+
+            var scalex = (xmax - xmin) / 800;
+            var scaley = (ymax - ymin) / 600;
+
+            console.log(scalex === scaley)
+            xmin -= moveleft * scalex;
+            xmax -= moveleft * scalex;
+            ymin += movetop * scaley;
+            ymax += movetop * scaley;
+            draw()
+
+            can.onmouseup = null;
+            can.onmousemove = null;
+        }
+    }
+
+
+
+</script>
+</body>
+</html>
