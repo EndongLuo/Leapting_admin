@@ -1,27 +1,33 @@
 <template>
-  <div class="test">
-    <tips />
-    <operation />
-  </div>
-</template>
+    <div class="test">
+        <tips />
+        首页
+
+    </div>
+    
+  </template>
   
   <script>
-import tips from "./tips";
-import operation from "./operation";
-export default {
-  name: "home",
-  components: { tips, operation },
-  data() {
-    return {};
+  import tips from './tips'
+  export default {
+    name: "home",
+    components:{tips},
+    data() {
+      return {
+      };
+      
+    },
+    mounted(){
+    },
+    methods: {
+      
   },
-  mounted() {},
-  methods: {},
-};
-</script>
+  };
+  </script>
   
   <style scoped>
-.test {
-  font-size: 0.5rem;
-}
-</style>
+  .test{
+    font-size: 0.5rem;
+  }
+  </style>
   

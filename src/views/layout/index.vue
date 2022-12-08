@@ -63,9 +63,9 @@ export default {
   components: { test },
   data() {
     return {
-      isCollapse: false, //导航栏默认为展开
-      toggle: false, //第二个图标默认隐藏
-      block: true, //默认显示第一个图标
+      isCollapse: true, //导航栏默认为展开
+      toggle: true, //第二个图标默认隐藏
+      block: false, //默认显示第一个图标
     };
   },
   methods: {
@@ -85,20 +85,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.logo{
-    // width: 199px;
-    // height: 60px;
-    // img{
-    //     width: 100%;
-    //     height: 100%;
-    // }
+.logo {
+  height: 60px;
+  img {
+    height: 100%;
+  }
 }
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 200px;
-//   min-height: 400px;
   height: 100vh;
 }
-.el-header,
+.el-header {
+  border-bottom: #c2c2c2 solid 1px;
+}
 .el-footer {
   background-color: #b3c0d1;
   color: #333;
