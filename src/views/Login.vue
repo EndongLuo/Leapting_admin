@@ -12,6 +12,9 @@
       <!-- <button class="btn-dl" @click ="handle">登录</button> -->
       <el-button class="btn-dl" @click ="handle">点击登录</el-button>
     </div>
+    <div class="ewm">
+      <img src="../assets/人机验证.png" alt="" width="130rem">
+    </div>
   </form>
   </div>
 </template>
@@ -91,6 +94,10 @@ input:focus{
   margin-top: 0.3rem;
   color: rgb(0, 6, 10);
 }
-
+.ewm{
+  margin-left: 12rem;
+  position: absolute;
+  top: 5rem;
+}
 
 </style>

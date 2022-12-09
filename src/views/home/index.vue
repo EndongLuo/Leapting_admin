@@ -2,16 +2,17 @@
     <div class="test">
         <tips />
         首页
-<operation />
+<Slide/>
     </div>
     
   </template>
   
   <script>
   import tips from './tips'
+  import Slide from './Slide'
   export default {
     name: "home",
-    components:{tips},
+    components:{tips,Slide},
     data() {
       return {
       };
