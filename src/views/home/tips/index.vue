@@ -3,12 +3,12 @@
     <div class="left">
       <!-- 电池 -->
       <div @click="open_battery">
-        <Battery :quantity="50" />
+        <Battery :quantity="10" />
       </div>
 
       <!-- 信号 -->
       <div class="signal" @click="open_signal">
-        <Signal :num="40" />
+        <Signal :num="80" />
       </div>
 
       <!-- 定位 -->
