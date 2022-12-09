@@ -40,11 +40,17 @@
     <el-container>
       <!-- 头部 -->
       <el-header>
-        <div class="collapse-btn">
+        <div class="header_inner">
+          <div class="collapse-btn">
           <!-- 点击展开收起导航和切换对应图标 -->
           <i class="el-icon-s-fold" @click="isC" v-show="block"></i>
           <i class="el-icon-s-unfold" @click="isC" v-show="toggle"></i>
         </div>
+        <div class="fullscreen">
+            <Fullscreen />
+        </div>
+        </div>
+        
       </el-header>
       <!-- 主要内容-路由组件 -->
       <el-main>
@@ -58,9 +64,10 @@
 
 <script>
 import test from "../test";
+import Fullscreen from '@/components/Fullscreen'
 export default {
   name: "layout",
-  components: { test },
+  components: { test ,Fullscreen},
   data() {
     return {
       isCollapse: true, //导航栏默认为展开
@@ -103,11 +110,24 @@ export default {
   color: #333;
   height: 5vh;
 }
-.collapse-btn {
-  margin-top: 0.2rem;
-  font-size: 0.5rem;
+.header_inner{
+display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.collapse-btn {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 8px;
+  font-size: 36px;
+}
+.fullscreen{
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 32px;
+}
 .el-aside {
   background-color: #d3dce6;
   height: 100vh;
