@@ -1,8 +1,10 @@
 <template>
-  <div class="test">
+  <div class="home">
     <Tips />
-    <Maps />
-    <Pull_up />
+    <div class="h_outer">
+      <Maps />
+      <Pull_up />
+    </div>
   </div>
 </template>
 
@@ -22,10 +24,16 @@ export default {
 </script>
 
 <style scoped>
-.test {
+.home {
   font-size: 0.5rem;
   display: flex;
   flex-direction: column;
-  flex: auto;
+  flex: 1;
+}
+.h_outer{
+  /* display: flex;
+  flex-direction: column; */
+  flex: 5;
+  /* height: 900px; */
 }
 </style>

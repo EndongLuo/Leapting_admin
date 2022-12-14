@@ -1,153 +1,104 @@
 <template>
-  <div class="Map_canvas">
-    <canvas id="mycanvas"></canvas>
-    <el-button type="primary" round @click="left">left</el-button>
-    <img class="img" src="./img/map001.png" alt="" />
-    {{ xmin }}
-    {{ xmax }}
-    {{ ymin }}
-    {{ ymax }}
+  <div>
+    <canvas
+      id="cvs"
+      width="1920"
+      height="750"
+    ></canvas>
+    <div class="img" v-show="false"><img src="./img/map002.png" alt="" /></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Map_canvas",
+  name: "cvs",
   data() {
     return {
-      xmin: 10,
-      ymin: 10,
-      xmax: 10,
-      ymax: 10,
+      useSatatu: false, // 是否处于点击状态
+      useList: [], // 储存滑动时的坐标
+      imageClice: {
+        // 当前图片的左上角
+        x: 5,
+        y: 0,
+      },
+      imageBox: 1000, // 图片的宽高，这里可以更具图片原有的大小按比例缩放
+      image: new Image(),
+      ctx: 0,
     };
   },
   mounted() {
-    this.draw();
-    this.draw().left();;
-    left()
+    this.init();
   },
   methods: {
-    draw() {
-      var can = document.getElementById("mycanvas");
-      var img = document.querySelector(".img");
-      //获取Context上下文
-      var ctx = can.getContext("2d");
-
-      var image = new Image();
-      console.log(image);
-      // image.src = "./img/map001.png";
-      console.log(img);
+    init() {
+      let { useSatatu, useList, imageClice, imageBox, image, ctx } = this;
+      const source = document.getElementById("cvs");
+      const img = document.querySelector(".img img");
+      //   image.src =
+      //     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Flmg.jj20.com%2Fup%2Fallimg%2Ftp10%2F2111251455453954-0-lp.jpg&refer=http%3A%2F%2Flmg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668321842&t=f7a4c1d5256426ae3633c8a5c9356676";
+      // image.src = "./img/map002.png";
       image.src = img.src;
-      ctx.drawImage(image, 0, 0, 300, 150);
-
-      function hua(moveleft, movetop) {
-        // image.src = url();
-        if (image.complete) {
-          ctx.clearRect(0, 0, 800, 600);
-          // ctx.drawImage(image, 0, 0);
-          ctx.drawImage(image, moveleft, movetop);
-          return;
+      image.onload = function () {
+        ctx = source.getContext("2d");
+        // console.log(ctx);
+        ctx.drawImage(image, imageClice.x, imageClice.y, imageBox, imageBox);
+      };
+      source.addEventListener("mousedown", (e) => {
+        if (
+          imageClice.x <= e.clientX &&
+          imageClice.x + imageBox >= e.clientX &&
+          imageClice.y <= e.clientY &&
+          imageClice.y + imageBox >= e.clientY
+        ) {
+          useList = [];
+          useSatatu = !useSatatu;
+          ctx.beginPath();
+          ctx.rect(imageClice.x, imageClice.y, imageBox, imageBox);
+          ctx.stroke();
+          useList.push({
+            x: e.clientX,
+            y: e.clientY,
+          });
+          source.onwheel = (e) => {
+            e.wheelDelta > 0 ? (imageBox += 100) : (imageBox -= 100);
+            createImage();
+          };
         }
-        image.onload = function () {
-          ctx.clearRect(0, 0, 800, 600);
-          ctx.drawImage(image, moveleft, movetop);
-        };
+      });
+      source.addEventListener("mousemove", (e) => {
+        if (useSatatu) {
+          console.log(e.clientX, e.clientY)
+          useList.push({
+            x: e.clientX,
+            y: e.clientY,
+          });
+          const val = useList.splice(0, 1);
+          imageClice = {
+            x: imageClice.x + useList[0].x - val[0].x,
+            y: imageClice.y + useList[0].y - val[0].y,
+          };
+          createImage();
+        }
+      });
+      source.addEventListener("mouseup", (e) => {
+        useSatatu = false;
+      });
+
+      function createImage() {
+        ctx.clearRect(0, 0, 1920, 750);
+        ctx.beginPath();
+        ctx.drawImage(image, imageClice.x, imageClice.y, imageBox, imageBox);
+        ctx.rect(imageClice.x, imageClice.y, imageBox, imageBox);
+        ctx.stroke();
       }
-
-      // 左移
-      function left() {
-        var dx = xmax - xmin;
-        xmin -= dx * 0.2;
-        xmax -= dx * 0.2;
-        // draw()
-        hua(xmin, xmax)
-    }
-
-    // 放大
-    function zoomIn(){
-        var dx = xmax - xmin;
-        var dy = ymax - ymin;
-        xmin += dx / 4;
-        xmax -= dx / 4;
-        ymin += dy / 4;
-        ymax -= dy / 4;
-        draw();
-        
-    }
-
-    // 缩小
-    function zoomDown(){
-        var dx = xmin- xmax  ;
-        var dy =  ymin- ymax;
-        xmin += dx * 4;
-        xmax -= dx * 4;
-        ymin += dy * 4;
-        ymax -= dy * 4;
-        draw();
-    }
-
-      var { xmin, xmax, ymin, ymax } = this;
-      console.log(this);
-      can.onmousedown = function (event) {
-        event = event || window.event;
-        var left = event.offsetX;
-        var top = event.offsetY;
-        // console.log(left, top);
-
-        can.onmousemove = function (event) {
-          event = event || window.event;
-          var left2 = event.offsetX;
-          var top2 = event.offsetY;
-          var moveleft = left2 - left;
-          var movetop = top2 - top;
-          ctx.clearRect(0, 0, 800, 600);
-          ctx.drawImage(img, moveleft, movetop);
-        };
-
-        can.onmouseup = function (event) {
-          event = event || window.event;
-          var left1 = event.offsetX;
-          var top1 = event.offsetY;
-          var moveleft = left1 - left;
-          var movetop = top1 - top;
-
-          var scalex = (xmax - xmin) / 800;
-          var scaley = (ymax - ymin) / 600;
-
-          // console.log(scalex === scaley)
-          xmin -= moveleft * scalex;
-          xmax -= moveleft * scalex;
-          ymin += movetop * scaley;
-          ymax += movetop * scaley;
-          console.log(xmax);
-          // this.draw()
-          hua(moveleft, movetop);
-
-          can.onmouseup = null;
-          can.onmousemove = null;
-        };
+      source.onwheel = (e) => {
+        e.wheelDelta > 0 ? (imageBox += 100) : (imageBox -= 100);
+        createImage();
       };
     },
   },
 };
 </script>
-
 <style lang="less">
-.Map_canvas {
-  width: 100%;
-  height: 100%;
 
-  // position: relative;
-  overflow: hidden;
-}
-canvas {
-  width: 100%;
-  min-height: 400px;
-  height: 100%;
-  // background-color: #d4d4d4;
-}
-.img {
-  margin-top: -400px;
-  visibility: hidden;
-}
 </style>

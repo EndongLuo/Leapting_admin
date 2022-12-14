@@ -58,7 +58,7 @@ export default {
 <style scoped lang="less">
 .maps {
   width: 100%;
-  min-height: 400px;
+  // min-height: 400px;
   height: 100%;
   margin-top: 10px;
   position: relative;
@@ -66,11 +66,11 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
-  img {
-    width: 100%;
-    height: 100%;
-    height: 8rem;
-  }
+  // img {
+  //   width: 100%;
+  //   height: 100%;
+  //   height: 8rem;
+  // }
 
   .map_left,
   .map_right {
