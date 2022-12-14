@@ -66,11 +66,6 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
-  // img {
-  //   width: 100%;
-  //   height: 100%;
-  //   height: 8rem;
-  // }
 
   .map_left,
   .map_right {
