@@ -1,6 +1,7 @@
 <template>
   <div class="maps">
     <Map_canvas />
+    <ControlStation/>
     <div class="map_left">
       <div class="left_list">
         <div class="l_icon">
@@ -50,8 +51,10 @@
 
 <script>
 import Map_canvas from "@/components/Map_canvas";
+
+import ControlStation from "../ControlStation/index.vue";
 export default {
-  components: { Map_canvas },
+  components: { Map_canvas, ControlStation},
 };
 </script>
 
