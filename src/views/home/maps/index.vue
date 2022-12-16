@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import Map_canvas from "@/components/Map_canvas";
+import Map_canvas from "@/components/Map_canvas/demo2.vue";
 export default {
   components: { Map_canvas },
 };

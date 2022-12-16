@@ -34,10 +34,10 @@ export default {
       let { useSatatu, useList, imageClice, imageBox, image, ctx } = this;
       const source = document.getElementById("cvs");
       const img = document.querySelector(".img img");
+      image.src = img.src;
       //   image.src =
       //     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Flmg.jj20.com%2Fup%2Fallimg%2Ftp10%2F2111251455453954-0-lp.jpg&refer=http%3A%2F%2Flmg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668321842&t=f7a4c1d5256426ae3633c8a5c9356676";
       // image.src = "./img/map002.png";
-      image.src = img.src;
       image.onload = function () {
         ctx = source.getContext("2d");
         // console.log(ctx);
@@ -67,7 +67,7 @@ export default {
       });
       source.addEventListener("mousemove", (e) => {
         if (useSatatu) {
-          console.log(e.clientX, e.clientY)
+          // console.log(e.clientX, e.clientY)
           useList.push({
             x: e.clientX,
             y: e.clientY,

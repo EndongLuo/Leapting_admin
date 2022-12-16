@@ -1,16 +1,134 @@
 <template>
   <div>
-    <canvas
+    <!-- <canvas
       id="cvs"
       width="1920"
       height="750"
       style="backgroundcolor: #aaa"
-    ></canvas>
-    <div class="img" v-show="false"><img src="./img/map002.png"  alt=""></div>
-    
+    ></canvas> -->
+    <!-- <div class="img" v-show="false"><img src="./img/map002.png"  alt=""></div> -->
+    <!-- <div>demo</div> -->
+    <div id="map"></div>
   </div>
 </template>
 
+<script>
+// import "@/utils/ros/easeljs";
+// import "easeljs/lib/easeljs";
+// import "eventemitter2/lib/eventemitter2";
+// import ROSLIB from "roslib/build/roslib";
+// import ROS2D from "ros2d/build/ros2d";
+export default {
+  name: "demo2",
+  data() {
+    return {
+      ws_address: "ws://192.168.4.139:9090",
+      connected: false,
+      ros: null,
+      logs: [],
+      loading: false,
+      topic: null,
+      message: null,
+    };
+  },
+  mounted() {
+    
+    this.ros = new ROSLIB.Ros({
+      url: this.ws_address,
+    });
+    console.log(this.ros);
+    //判断是否连接成功
+    this.ros.on("connection", function () {
+      console.log("Connected to websocket server.");
+    });
+
+    this.ros.on("error", function (error) {
+      console.log("Error connecting to websocket server: ", error);
+    });
+
+    this.ros.on("close", function () {
+      console.log("Connection to websocket server closed.");
+    });
+
+    // Create the main viewer. 创建主查看器。
+    var viewer = new ROS2D.Viewer({
+      divID: "map",
+      width: 800,
+      height: 500,
+    });
+
+    // Setup the map client. 设置地图客户端。
+    var gridClient = new ROS2D.OccupancyGridClient({
+      ros: this.ros,
+      rootObject: viewer.scene,
+      continuous: true,
+    });
+    // Scale the canvas to fit to the map. 缩放画布以适合地图
+    gridClient.on("change", function () {
+      viewer.scaleToDimensions(
+        gridClient.currentGrid.width,
+        gridClient.currentGrid.height
+      );
+    });
+  },
+  methods: {
+    connect() {
+      // this.loading = true;
+      // this.ros = new ROSLIB.Ros({
+      //   url: this.ws_address,
+      // });
+      // this.ros.on("connection", () => {
+      //   this.logs.unshift(new Date().toTimeString() + " - Connected!");
+      //   this.connected = true;
+      //   this.loading = false;
+      // });
+      // this.ros.on("error", (error) => {
+      //   this.logs.unshift(new Date().toTimeString() + ` - Error: ${error}`);
+      // });
+      // this.ros.on("close", () => {
+      //   this.logs.unshift(new Date().toTimeString() + " - Disconnected!");
+      //   this.connected = false;
+      //   this.loading = false;
+      // });
+    },
+    init() {
+      //   // Connect to ROS.
+      //   this.ros = new window.ROSLIB.Ros({
+      //     url: this.ws_address,
+      //   });
+      //   //判断是否连接成功并输出相应的提示消息到web控制台
+      //   this.ros.on("connection", function () {
+      //     console.log("Connected to websocket server.");
+      //   });
+      //   this.ros.on("error", function (error) {
+      //     console.log("Error connecting to websocket server: ", error);
+      //   });
+      //   this.ros.on("close", function () {
+      //     console.log("Connection to websocket server closed.");
+      //   });
+      //   // Create the main viewer. 创建主查看器。
+      //   var viewer = new ROS2D.Viewer({
+      //     divID: "map",
+      //     width: 600,
+      //     height: 500,
+      //   });
+      //   // Setup the map client. 设置地图客户端。
+      //   var gridClient = new ROS2D.OccupancyGridClient({
+      //     ros: this.ros,
+      //     rootObject: viewer.scene,
+      //     continuous: true,
+      //   });
+      //   // Scale the canvas to fit to the map. 缩放画布以适合地图
+      //   gridClient.on("change", function () {
+      //     viewer.scaleToDimensions(
+      //       gridClient.currentGrid.width,
+      //       gridClient.currentGrid.height
+      //     );
+      //   });
+    },
+  },
+};
+</script>
 
 <!-- <script setup>
 import { ref, nextTick, reactive } from 'vue'
@@ -81,4 +199,8 @@ import { ref, nextTick, reactive } from 'vue'
 </script> -->
 
 <style lang="less" scoped>
+#map {
+  width: 100%;
+  height: 500px;
+}
 </style>

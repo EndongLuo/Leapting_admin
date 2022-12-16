@@ -3,6 +3,8 @@
       <canvas width="1000" height="500" style="border:1px solid #000;" id="myCanvas" @mousewheel="mouseWheel"></canvas>
       <input type="range" id="scale-range" :min="rangeMin" :max="rangeMax" step="0.01" v-model="rangeValue" @mousemove="mousemoveCanvas()" style="display: block;">
       <!-- min设置拖动条最小值 max最大值 -->
+    <div class="img" v-show="false"><img src="./img/map002.png" alt="" /></div>
+
     </div>
   </template>
   
@@ -27,7 +29,9 @@
       this.ctxCanvas = this.canvas.getContext("2d")
       // 绘制图片
       this.img = new Image()
-      this.img.src = "./img/map002.png"
+      const image = document.querySelector(".img img");
+      this.img.src = image.src;
+    //   this.img.src = "./img/map002.png"
       this.img.onload = () => {
         this.ctxCanvas.drawImage(this.img, this.canvas.width / 2 - this.img.width / 2, this.canvas.height / 2 - this.img.height / 2);
       };

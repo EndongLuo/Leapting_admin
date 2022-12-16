@@ -36,10 +36,8 @@ export default {
     // 样式控制
     bgClass() {
       if (this.num >= 60) {
-        console.log("success");
         return "success";
       } else if (this.num >= 40) {
-        console.log("warning");
         return "warning";
       } else return "danger";
     },
