@@ -90,6 +90,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding-top: 0.5rem;
+    padding-right: 100px;
   }
 
   .p {
@@ -98,7 +99,7 @@ export default {
     /* margin-left: 50vw; */
     font-size: 20px;
     font-weight: 500;
-    border-bottom: 1px solid rgb(171, 169, 169);
+    /* border-bottom: 1px solid rgb(171, 169, 169); */
     text-align: center;
     position: absolute;
   }

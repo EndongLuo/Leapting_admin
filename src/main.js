@@ -25,6 +25,16 @@ import ElementUI from 'element-ui';
 Vue.use(ElementUI);
 
 
+// window.createjs = this.createjs; 
+// require('createjs-module'); 
+// // this.createjs = {}; 
+// // ros相关工具包
+// import '@/utils/ros/easeljs.js'
+// import '@/utils/ros/eventemitter2.js'
+// import '@/utils/ros/roslib.js'
+// import '@/utils/ros/ros2d.js'
+
+
 new Vue({
   render: h => h(App),
   beforeCreate() {

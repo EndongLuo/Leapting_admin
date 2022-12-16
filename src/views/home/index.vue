@@ -4,6 +4,7 @@
     <div class="h_outer">
       <Maps />
       <Pull_up />
+      <ControlStation/>
     </div>
   </div>
 </template>
@@ -12,9 +13,12 @@
 import Tips from "./tips";
 import Maps from "./maps";
 import Pull_up from "@/components/Pull_up";
+
+import ControlStation from "@/views/home/ControlStation/index.vue";
+
 export default {
   name: "home",
-  components: { Tips, Maps, Pull_up },
+  components: { Tips, Maps, Pull_up ,ControlStation},
   data() {
     return {};
   },
